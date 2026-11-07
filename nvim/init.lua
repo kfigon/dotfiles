@@ -38,6 +38,18 @@ vim.opt.expandtab = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
+--
+-- Highlight text after yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight yanked text",
+    group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "IncSearch",
+            timeout = 100,
+        })
+    end,
+})
 
 require("lazy").setup({
   {
@@ -64,6 +76,29 @@ require("lazy").setup({
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {},
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+        require("lualine").setup({
+            options = {
+                theme = "auto",
+                globalstatus = true,
+                icons_enabled = true,
+            },
+            sections = {
+                lualine_a = { "mode" },
+                lualine_b = { "branch", "diff" },
+                lualine_c = { "filename" },
+                lualine_x = { "diagnostics", "filetype" },
+                lualine_y = { "progress" },
+                lualine_z = { "location" },
+            },
+        })
+    end,
   },
   {
 	"nvim-neo-tree/neo-tree.nvim",
