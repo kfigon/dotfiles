@@ -61,6 +61,11 @@ require("lazy").setup({
     end,
   },
   {
+	"folke/which-key.nvim",
+	event = "VeryLazy",
+	opts = {},
+  },
+  {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
@@ -179,11 +184,11 @@ require("lazy").setup({
     		},
     	})
     
-    	vim.keymap.set("n", "<leader>ff", builtin.find_files)
-    	vim.keymap.set("n", "<leader>fg", builtin.live_grep)
-    	vim.keymap.set("n", "<leader>fb", builtin.buffers)
-    	vim.keymap.set("n", "<leader>fh", builtin.help_tags)
-    	vim.keymap.set("n", "<leader>fr", builtin.oldfiles)
+    	vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
+    	vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "live grep" })
+    	vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "find buffers" })
+    	vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "find help tags" })
+    	vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "find old files" })
     end,
   },
 })
